@@ -19,5 +19,20 @@ public class ContactoTest {
         assertEquals("", contacto.getNombre());
         assertEquals("juan.perez@example.com", contacto.getEmail());
     }
-    
+    @Test
+    public void teatVariosContactos(){
+        Contacto contacto1= new Contacto("Enzo Alfonso", "null");
+        Contacto contacto2= new Contacto("","");
+        Contacto contacto3= new Contacto("","");
+
+        assertEquals("Enzo Alfonso", contacto1.getNombre());
+        
+        assertEquals("null", contacto1.getEmail());
+
+        assertEquals("", contacto2.getNombre());
+        assertEquals("", contacto2.getEmail());
+
+        assertEquals("", contacto3.getNombre());
+        assertEquals("", contacto3.getEmail());
+    }
 }
