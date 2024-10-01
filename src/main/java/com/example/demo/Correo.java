@@ -1,5 +1,5 @@
 package com.example.demo;
-import java.util.List;
+//import java.util.List;
 
 public class Correo {
 
@@ -8,7 +8,7 @@ private String contenido;
 private Contacto remitente;
 private Contacto destinatario;
 
-private List<Contacto> destinatarios;
+//private List<Contacto> destinatarios; revisar :v
 
 public Correo(String asunto, String contenido, Contacto remitente, Contacto destinatario) {
     this.asunto = asunto;
