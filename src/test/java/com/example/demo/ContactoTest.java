@@ -21,18 +21,17 @@ public class ContactoTest {
     }
     @Test
     public void teatVariosContactos(){
-        Contacto contacto1= new Contacto("Enzo Alfonso", "null");
-        Contacto contacto2= new Contacto("","");
-        Contacto contacto3= new Contacto("","");
+        Contacto contacto1= new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com");
+        Contacto contacto2= new Contacto("jeuel","null");
+        Contacto contacto3= new Contacto("null","carla_mart@gmail.com");
 
         assertEquals("Enzo Alfonso", contacto1.getNombre());
-        
-        assertEquals("null", contacto1.getEmail());
+        assertEquals("Enzo_alfonso@gmail.com", contacto1.getEmail());
 
-        assertEquals("", contacto2.getNombre());
-        assertEquals("", contacto2.getEmail());
+        assertEquals("jeuel", contacto2.getNombre());
+        assertEquals("null", contacto2.getEmail());
 
-        assertEquals("", contacto3.getNombre());
-        assertEquals("", contacto3.getEmail());
+        assertEquals("null", contacto3.getNombre());
+        assertEquals("carla_mart@gmail.com", contacto3.getEmail());
     }
 }
