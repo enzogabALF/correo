@@ -28,6 +28,14 @@ public class Bandeja_de_enviados {
         return correos;
     }
 
+    public void enviarCorreo(Correo correo) {
+        correos.add(correo);
+    }
+
+    public List<Correo> getBandejaDeEnviados() {
+        return correos;
+    }
+
 
 
 }
