@@ -3,11 +3,7 @@ package com.example.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class Bandeja_de_enviados {
-
-
 
     private List<Correo> correos;
 
@@ -35,7 +31,4 @@ public class Bandeja_de_enviados {
     public List<Correo> getBandejaDeEnviados() {
         return correos;
     }
-
-
-
 }

@@ -1,10 +1,8 @@
 package com.example.demo;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-//import java.lang.reflect.Array;
-//import java.util.ArrayList;
-
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -12,48 +10,95 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class CorreoTest {
 
     @Test
-    public void Creacion_de_un_correo(){
-
+    public void Creacion_de_un_correo_test() {
         Contacto remitente = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com");
-        Contacto destinatario = new Contacto("Carla Martinez", "carla_mart@gmail.com");
+        Contacto destinatario1 = new Contacto("Carla Martinez", "carla_mart@gmail.com");
 
-        Correo correo = new Correo("asunto", "contenido", remitente, destinatario);
+        
+        List<Contacto> destinatarios = Arrays.asList(destinatario1);
+        
+        Correo correo = new Correo("asunto", "contenido", remitente, destinatarios);
 
-        assertEquals("asunto", correo.getasunto());
-        assertEquals("contenido", correo.getcontenido());
-        assertEquals(remitente, correo.getremitente());
-        assertEquals(destinatario, correo.getdestinatario());
+        assertEquals("asunto", correo.getAsunto());
+        assertEquals("contenido", correo.getContenido());
+        assertEquals(remitente, correo.getRemitente());
+        
+        
+        assertEquals(1, correo.getDestinatarios().size());
+        assertEquals(destinatario1, correo.getDestinatarios().get(0));
+    }
+
+    @Test
+    public void Creacion_de_correo_sin_asunto_tets() {
+        Contacto remitente = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com");
+        Contacto destinatario1 = new Contacto("Carla Martinez", "carla_mart@gmail.com");
+
+        
+        List<Contacto> destinatarios = Arrays.asList(destinatario1);
+        
+        Correo correo = new Correo("", "contenido", remitente, destinatarios);
+
+        assertEquals("", correo.getAsunto());
+        assertEquals("contenido", correo.getContenido());
+        assertEquals(remitente, correo.getRemitente());
+        
+        
+        assertEquals(1, correo.getDestinatarios().size());
+        assertEquals(destinatario1, correo.getDestinatarios().get(0));
+    }
+
+    @Test
+    public void Creacion_de_correo_con_destinatario_sin_informacion_tets() {
+        Contacto remitente = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com");
+        Contacto destinatario1 = new Contacto("", "");   //datos vacio para este caso :v
+
+        
+        List<Contacto> destinatarios = Arrays.asList(destinatario1);
+        
+        Correo correo = new Correo("asunto", "contenido", remitente, destinatarios);
+
+        assertEquals("asunto", correo.getAsunto());
+        assertEquals("contenido", correo.getContenido());
+        assertEquals(remitente, correo.getRemitente());
+        
+       
+        assertEquals(1, correo.getDestinatarios().size());
+        assertEquals(destinatario1, correo.getDestinatarios().get(0));
+        assertNotEquals(null, correo.getDestinatarios().get(0)); 
     }
 
 
     @Test
-    public void Creacion_de_correo_sin_asunto(){
+        public void Crear_correo_con_multiples_destinatarios_test() {
+        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
+        Contacto destinatario1 = new Contacto("Maria Lopez", "maria.lopez@example.com");
+        Contacto destinatario2 = new Contacto("Carlos Gomez", "carlos.gomez@example.com");
 
-        Contacto remitente = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com");
-        Contacto destinatario = new Contacto("Carla Martinez", "carla_mart@gmail.com");
+        List<Contacto> destinatarios = Arrays.asList(destinatario1, destinatario2);
 
-        Correo correo = new Correo("", "contenido", remitente, destinatario);
+        Correo correo = new Correo("Asunto", "Contenido", remitente, destinatarios);
 
-        assertEquals("", correo.getasunto());
-        assertEquals("contenido", correo.getcontenido());
-        assertEquals(remitente, correo.getremitente());
-        assertEquals(destinatario, correo.getdestinatario());
-
+        assertEquals("Asunto", correo.getAsunto());
+        assertEquals("Contenido", correo.getContenido());
+        assertEquals(remitente, correo.getRemitente());
+        assertEquals(2, correo.getDestinatarios().size());
+        assertEquals(destinatario1, correo.getDestinatarios().get(0));
+        assertEquals(destinatario2, correo.getDestinatarios().get(1));
     }
 
     @Test
-    public void Creacion_de_correo_sin_Contacto(){
+    public void Enviar_correo_con_multiples_Destinatarios_test() {
+        Bandeja_de_enviados gestor = new Bandeja_de_enviados();
+        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
+        Contacto destinatario1 = new Contacto("Maria Lopez", "maria.lopez@example.com");
+        Contacto destinatario2 = new Contacto("Carlos Gomez", "carlos.gomez@example.com");
 
-        Contacto remitente = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com");
-        Contacto destinatario = new Contacto("", "");
+        List<Contacto> destinatarios = Arrays.asList(destinatario1, destinatario2);
+        Correo correo = new Correo("Asunto", "Contenido", remitente, destinatarios);
 
-        Correo correo = new Correo("asunto", "contenido", remitente, destinatario);
+        gestor.enviarCorreo(correo);
 
-        assertEquals("asunto", correo.getasunto());
-        assertEquals("contenido", correo.getcontenido());
-        assertEquals(remitente, correo.getremitente());
-        assertNotEquals(null, correo.getdestinatario()); //revisar :v
-
-    }
-    
+        assertEquals(1, gestor.getBandejaDeEnviados().size());
+        assertEquals(correo, gestor.getBandejaDeEnviados().get(0));
+    }  
 }

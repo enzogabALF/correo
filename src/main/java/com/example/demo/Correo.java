@@ -1,68 +1,33 @@
 package com.example.demo;
-//import java.util.List;
+
+import java.util.List;
 
 public class Correo {
+    private String asunto;
+    private String contenido;
+    private Contacto remitente;
+    private List<Contacto> destinatarios;
 
-private String asunto;
-private String contenido;
-private Contacto remitente;
-private Contacto destinatario;
+    public Correo(String asunto, String contenido, Contacto remitente, List<Contacto> destinatarios) {
+        this.asunto = asunto;
+        this.contenido = contenido;
+        this.remitente = remitente;
+        this.destinatarios = destinatarios;
+    }
 
-//private List<Contacto> destinatarios; revisar :v
+    public String getAsunto() {
+        return asunto;
+    }
 
-public Correo(String asunto, String contenido, Contacto remitente, Contacto destinatario) {
-    this.asunto = asunto;
-    this.contenido = contenido;
-    this.remitente = remitente;
-    this.destinatario = destinatario;
-}
-/* 
-public String setasunto() {
-    return asunto;
-}
+    public String getContenido() {
+        return contenido;
+    }
 
-public String setcontenido() {
-    return contenido;
-}
+    public Contacto getRemitente() {
+        return remitente;
+    }
 
-public Contacto setremitente() {
-    return remitente;
-}
-
-public Contacto setdestinatario() {
-    return destinatario;
-}
-
-public List<Contacto> setdestinatarios() {
-    return destinatarios;
-}
-*/
-public String getasunto(){
-    return asunto;
-}
-
-public String getcontenido(){
-    return contenido;
-}
-
-public Contacto getremitente(){
-    return remitente;
-}
-
-public Contacto getdestinatario(){
-    return destinatario;
-}
-
-/*
-public List<Contacto> getdestinatarios(){
-    return destinatarios;
-}
-
- */
-
-
-
-
-
-    
+    public List<Contacto> getDestinatarios() {
+        return destinatarios;
+    }
 }
