@@ -10,7 +10,7 @@ public class GestorDeEmailsTest {
 
     @Test
     public void Enviar_correo_test() {
-        Bandeja_de_enviados gestor = new Bandeja_de_enviados();
+        Bandejas gestor = new Bandejas();
         Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
         
         Contacto destinatario1 = new Contacto("Maria Lopez", "maria.lopez@example.com");

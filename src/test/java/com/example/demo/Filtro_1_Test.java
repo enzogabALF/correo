@@ -13,7 +13,7 @@ public class Filtro_1_Test {
     
     @Test
     public void Filtro_1_por_remitente_test() {
-        Bandeja_de_enviados gestor = new Bandeja_de_enviados();
+        Bandejas gestor = new Bandejas();
         
         
         Contacto remitente1 = new Contacto("profesor@ucp.edu.ar", "profesor@ucp.edu.ar");

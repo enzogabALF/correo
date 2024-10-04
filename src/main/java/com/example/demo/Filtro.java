@@ -15,7 +15,7 @@ public class Filtro {
    
     public List<Correo> aplicarFiltro(List<Correo> correos) {
         return correos.stream()
-                .filter(correo -> correo.getRemitente().getEmail().contains(criterio)) // Filtro basado en remitente
+                .filter(correo -> correo.getRemitente().getEmail().contains(criterio)) 
                 .collect(Collectors.toList());
     }
 }

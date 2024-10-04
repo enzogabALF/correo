@@ -88,7 +88,7 @@ public class CorreoTest {
 
     @Test
     public void Enviar_correo_con_multiples_Destinatarios_test() {
-        Bandeja_de_enviados gestor = new Bandeja_de_enviados();
+        Bandejas gestor = new Bandejas();
         Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
         Contacto destinatario1 = new Contacto("Maria Lopez", "maria.lopez@example.com");
         Contacto destinatario2 = new Contacto("Carlos Gomez", "carlos.gomez@example.com");
