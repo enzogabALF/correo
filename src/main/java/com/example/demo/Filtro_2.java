@@ -25,8 +25,8 @@ public class Filtro_2 {
                 if (correo.getAsunto().contains(criterio) || 
                     correo.getContenido().contains(criterio) ||
                     correo.getRemitente().getEmail().contains(criterio)) {
-                    cumpleCriterios = true;  // Si alguno coincide, lo marcamos
-                    break;  // Salimos del bucle si encontramos un criterio coincidente
+                    cumpleCriterios = true;  
+                    break;  
                 }
             }
             if ((incluir && cumpleCriterios) || (!incluir && !cumpleCriterios)) {
