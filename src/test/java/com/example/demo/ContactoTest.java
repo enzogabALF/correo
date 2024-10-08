@@ -9,9 +9,13 @@ public class ContactoTest {
 
     @Test
     public void Crear_contacto_test() {
+    
         Contacto contacto = new Contacto("Juan Perez", "juan.perez@example.com");
         assertEquals("Juan Perez", contacto.getNombre());
         assertEquals("juan.perez@example.com", contacto.getEmail());
+        assertEquals("", contacto.getEntrada());
+        assertEquals("", contacto.getEnviados());
+
     }
     @Test
     public void Nombre_vacio_test() {
@@ -21,6 +25,7 @@ public class ContactoTest {
     }
     @Test
     public void Varios_contactos_test(){
+
         Contacto contacto1= new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com");
         Contacto contacto2= new Contacto("jeuel","null");
         Contacto contacto3= new Contacto("null","carla_mart@gmail.com");

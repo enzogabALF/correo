@@ -13,17 +13,13 @@ public class CorreoTest {
     public void Creacion_de_un_correo_test() {
         Contacto remitente = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com");
         Contacto destinatario1 = new Contacto("Carla Martinez", "carla_mart@gmail.com");
-
-        
-        List<Contacto> destinatarios = Arrays.asList(destinatario1);
-        
+        List<Contacto> destinatarios = Arrays.asList(destinatario1);        
         Correo correo = new Correo("asunto", "contenido", remitente, destinatarios);
-
+        remitente.setEnviados(new Bandejas());
+        destinatario1.setEntrada(new Bandejas());
         assertEquals("asunto", correo.getAsunto());
         assertEquals("contenido", correo.getContenido());
         assertEquals(remitente, correo.getRemitente());
-        
-        
         assertEquals(1, correo.getDestinatarios().size());
         assertEquals(destinatario1, correo.getDestinatarios().get(0));
     }
@@ -56,7 +52,10 @@ public class CorreoTest {
         List<Contacto> destinatarios = Arrays.asList(destinatario1);
         
         Correo correo = new Correo("asunto", "contenido", remitente, destinatarios);
-
+        remitente.setEnviados(new Bandejas());
+        destinatario1.setEntrada(new Bandejas());
+        //remitente.getEnviados()= add.addCorreo(correo);
+        //destinatario1.getEntrada()= add.addCorreo(correo);
         assertEquals("asunto", correo.getAsunto());
         assertEquals("contenido", correo.getContenido());
         assertEquals(remitente, correo.getRemitente());

@@ -3,7 +3,7 @@ package com.example.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bandejas {
+public class Bandejas{
 
     private List<Correo> bandejaDeSpam = new ArrayList<>();
 
@@ -64,6 +64,11 @@ public class Bandejas {
     
     public void vaciarPapelera(List<Correo> papelera) {
         papelera.clear();
+    }
+
+    public Integer size() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'size'");
     }
     
 }

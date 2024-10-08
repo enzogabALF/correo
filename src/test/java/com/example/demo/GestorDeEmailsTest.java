@@ -200,5 +200,4 @@ public class GestorDeEmailsTest {
     
         assertEquals(0, gestor.getBandejaDeSpam().size());  // No debería haber correos en la bandeja de spam
     }
-
 }

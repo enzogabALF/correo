@@ -19,7 +19,6 @@ public class Filtro_2 {
         List<Correo> resultado = new ArrayList<>();
         for (Correo correo : correos) {
             boolean cumpleCriterios = false;
-
             
             for (String criterio : criterios) {
                 if (correo.getAsunto().contains(criterio) || 
@@ -36,5 +35,3 @@ public class Filtro_2 {
         return resultado;
     }
 }
-
-
