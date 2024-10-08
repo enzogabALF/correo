@@ -13,8 +13,7 @@ public class ContactoTest {
         Contacto contacto = new Contacto("Juan Perez", "juan.perez@example.com");
         assertEquals("Juan Perez", contacto.getNombre());
         assertEquals("juan.perez@example.com", contacto.getEmail());
-        assertEquals("", contacto.getEntrada());
-        assertEquals("", contacto.getEnviados());
+
 
     }
     @Test

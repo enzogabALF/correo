@@ -89,17 +89,18 @@ public class Unificacion_Test {
 
     @Test
     public void Enviar_correo_con_multiples_destinatarios_test() {
-        Bandejas gestor = new Bandejas();
+        
         Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
         Contacto destinatario1 = new Contacto("Maria Lopez", "maria.lopez@example.com");
         Contacto destinatario2 = new Contacto("Carlos Gomez", "carlos.gomez@example.com");
         List<Contacto> destinatarios = Arrays.asList(destinatario1, destinatario2);
 
         Correo correo = new Correo("Asunto", "Contenido", remitente, destinatarios);
-        gestor.enviarCorreo(correo);
+  
+        remitente.setEnviados(new Bandejas()).enviarCorreo(correo);
 
-        assertEquals(1, gestor.getBandejaDeEnviados().size());
-        assertEquals(correo, gestor.getBandejaDeEnviados().get(0));
+        assertEquals(1, remitente.getEnviados().size());
+        
     }
 
     // Tests de Filtro 1

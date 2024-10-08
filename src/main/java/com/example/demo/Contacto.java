@@ -41,5 +41,22 @@ public class Contacto {
     Bandejas setPapelera(Bandejas papelera) {
         return this.papelera = papelera;
     }
+
+
+    public Bandejas getBandejaEntrada() {
+        return entrada;
+    }
+
+    public Bandejas getBandejaEnviado() {
+        return enviados;
+    }
+
+    public Bandejas getBandejaSpam() {
+        return spam;
+    }
+
+    public Bandejas getBandejaPapelera() {
+        return papelera;
+    }
     
 }
