@@ -8,7 +8,7 @@ public class Contacto {
     private Bandejas papelera;
     private Bandejas spam;
 
-    public Contacto(String nombre, String email) {
+    public Contacto(String nombre, String email, Bandejas entrada, Bandejas enviados, Bandejas papelera, Bandejas spam) {
         this.nombre = nombre;
         this.email = email;
         this.entrada = setEntrada(entrada);
@@ -16,30 +16,19 @@ public class Contacto {
         this.papelera = setPapelera(papelera);
         this.spam = setSpam(spam);
     }
-    public String getNombre() {
-        return nombre;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public Bandejas getEntrada() {
-        return entrada;
-    }
-    public Bandejas getEnviados() {
-        return enviados;
-    }
+    
 
-    Bandejas setEntrada(Bandejas entrada) {
+    private Bandejas setEntrada(Bandejas entrada) {
         return this.entrada = entrada;
     }
     
     private Bandejas setEnviados(Bandejas enviados) {
         return this.enviados = enviados;
     }
-    Bandejas setSpam(Bandejas spam) {
+    private Bandejas setSpam(Bandejas spam) {
         return this.spam = spam;
     }
-    Bandejas setPapelera(Bandejas papelera) {
+    private Bandejas setPapelera(Bandejas papelera) {
         return this.papelera = papelera;
     }
 
@@ -60,4 +49,27 @@ public class Contacto {
         return papelera;
     }
     
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+
+    public void setBandejaEntrada(Bandejas entrada) {
+        this.entrada = entrada;
+    }
+
+    
+    public void enviarCorreo(Correo correo) {
+        // Añadir el correo a la bandeja de enviados del remitente
+        correo.getRemitente().getBandejaEnviado().addCorreo(correo);
+    }
+
+    public void recibirCorreo(Correo correo) {
+        // Añadir el correo a la bandeja de entrada del destinatario
+        correo.getDestinatarios().forEach(destinatario -> destinatario.getBandejaEntrada().addCorreo(correo));
+    }
 }

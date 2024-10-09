@@ -18,15 +18,6 @@ public class GestorCorreos {
         papelera.clearCorreos();
     }
 
-    public void enviarCorreo(Correo correo) {
-        // Añadir el correo a la bandeja de enviados del remitente
-        correo.getRemitente().getEnviados().addCorreo(correo);
-
-        // Añadir el correo a la bandeja de entrada de cada destinatario
-        for (Contacto destinatario : correo.getDestinatarios()) {
-            destinatario.getBandejaEntrada().addCorreo(correo);
-        }
-    }
 
     public void moverSpamSinRemitente(Bandejas bandeja, Bandejas spam) {
         Iterator<Correo> iterator = bandeja.getCorreos().iterator();

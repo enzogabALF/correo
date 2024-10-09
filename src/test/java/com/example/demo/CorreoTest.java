@@ -13,8 +13,8 @@ public class CorreoTest {
 
     @Test
     public void Creacion_de_un_correo_test() {
-        Contacto remitente = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com");
-        Contacto destinatario1 = new Contacto("Carla Martinez", "carla_mart@gmail.com");
+        Contacto remitente = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto destinatario1 = new Contacto("Carla Martinez", "carla_mart@gmail.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         List<Contacto> destinatarios = Arrays.asList(destinatario1);        
         Correo correo = new Correo("asunto", "contenido", remitente, destinatarios);
         assertEquals(destinatarios, correo.getDestinatarios());
@@ -27,8 +27,8 @@ public class CorreoTest {
 
     @Test
     public void Creacion_de_correo_sin_asunto_tets() {
-        Contacto remitente = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com");
-        Contacto destinatario1 = new Contacto("Carla Martinez", "carla_mart@gmail.com");
+        Contacto remitente = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto destinatario1 = new Contacto("Carla Martinez", "carla_mart@gmail.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
 
         
         List<Contacto> destinatarios = Arrays.asList(destinatario1);
@@ -46,15 +46,15 @@ public class CorreoTest {
 
     @Test
     public void Creacion_de_correo_con_destinatario_sin_informacion_tets() {
-        Contacto remitente = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com");
-        Contacto destinatario1 = new Contacto("", "");   //datos vacio para este caso :v
+        Contacto remitente = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto destinatario1 = new Contacto("", "",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());   //datos vacio para este caso :v
 
         
         List<Contacto> destinatarios = Arrays.asList(destinatario1);
         
         Correo correo = new Correo("asunto", "contenido", remitente, destinatarios);
-        remitente.getEnviados();
-        destinatario1.setEntrada(destinatario1.getBandejaEntrada());
+        remitente.getBandejaEnviado();
+        destinatario1.setBandejaEntrada(destinatario1.getBandejaEntrada());
         //Bandejas add = new Bandejas();
         //remitente.getEnviados()= add.addCorreo(correo);                                        
         //destinatario1.getEntrada()= add.addCorreo(correo);
@@ -71,9 +71,9 @@ public class CorreoTest {
 
     @Test
         public void Crear_correo_con_multiples_destinatarios_test() {
-        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
-        Contacto destinatario1 = new Contacto("Maria Lopez", "maria.lopez@example.com");
-        Contacto destinatario2 = new Contacto("Carlos Gomez", "carlos.gomez@example.com");
+        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto destinatario1 = new Contacto("Maria Lopez", "maria.lopez@example.com",  new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto destinatario2 = new Contacto("Carlos Gomez", "carlos.gomez@example.com",  new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
 
         List<Contacto> destinatarios = Arrays.asList(destinatario1, destinatario2);
 
@@ -88,40 +88,43 @@ public class CorreoTest {
     }
 
     @Test
-    public void testEnviarCorreoConMultiplesDestinatarios() {
-        // Crear contactos
-        Contacto remitente = new Contacto("Juan", "juan@example.com");
-        Contacto destinatario1 = new Contacto("Ana", "ana@example.com");
-        Contacto destinatario2 = new Contacto("Carlos", "carlos@example.com");
+    public void testEnviarYRecibirCorreo() {
+        // Configuración inicial
+        Contacto remitente = new Contacto("Remitente", "remitente@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto destinatario = new Contacto("Destinatario1", "destinatario1@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
 
-        // Crear lista de destinatarios
-        List<Contacto> destinatarios = Arrays.asList(destinatario1, destinatario2);
-     
+        // Lista de destinatarios
+        List<Contacto> destinatarios = new ArrayList<>();
+        destinatarios.add(destinatario);
 
-        // Crear correo
-        Correo correo = new Correo("Asunto Importante", "Contenido del correo", remitente, destinatarios);
-
-        // Crear bandeja del remitente
-        Bandejas bandejasRemitente = remitente.getEnviados();
-
-        // Enviar correo
-        GestorCorreos bandejas = new GestorCorreos();
-        bandejas.enviarCorreo(correo);
-
-        // Verificar que el correo fue añadido a la bandeja de enviados del remitente
-        assertTrue(bandejasRemitente.getCorreos().contains(correo));
-
-        // Verificar que el correo fue añadido a la bandeja de entrada de cada destinatario
-        assertTrue(destinatario1.getBandejaEntrada().getCorreos().contains(correo));
+        // Crear el correo
+        Correo nuevoCorreo = new Correo("Asunto", "Contenido", remitente, destinatarios);
         
+        // Enviar el correo
+        remitente.getBandejaEnviado().addCorreo(nuevoCorreo);
+        destinatario.getBandejaEntrada().addCorreo(nuevoCorreo);
+        // Verificar que el correo está en la bandeja de enviados del remitente
+        assertTrue(remitente.getBandejaEnviado().getCorreos().contains(nuevoCorreo));
+
+        // Verificar que el correo está en la bandeja de entrada del destinatario
+        assertEquals(1, destinatario.getBandejaEntrada().getCorreos().size());
+        Correo correoRecibido = destinatario.getBandejaEntrada().getCorreos().get(0);
+        assertEquals("Asunto", correoRecibido.getAsunto());
+        assertEquals("Contenido", correoRecibido.getContenido());
+        assertEquals(remitente, correoRecibido.getRemitente());
+        assertEquals(1, correoRecibido.getDestinatarios().size());
+        assertEquals(destinatario, correoRecibido.getDestinatarios().get(0));
     }
-    
+        
+
+
+
     @Test
     public void testAddCorreo() {
         Bandejas bandejas = new Bandejas();
-        Contacto contacto = new Contacto("Juan", "juan@example.com");
+        Contacto contacto = new Contacto("Juan", "juan@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         
-        Contacto destinatario1= new Contacto("Ana", "ana@example.com");
+        Contacto destinatario1= new Contacto("Ana", "ana@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         List<Contacto> destinatarios =  Arrays.asList(destinatario1);
         Correo correo1 = new Correo("Asunto 1", "Contenido 1", contacto, destinatarios);
         bandejas.addCorreo(correo1);
@@ -132,9 +135,9 @@ public class CorreoTest {
     @Test
     public void testRemoveCorreo() {
         Bandejas bandejas = new Bandejas();
-        Contacto contacto = new Contacto("Juan", "juan@example.com");
+        Contacto contacto = new Contacto("Juan", "juan@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         
-        Contacto destinatario1= new Contacto("Ana", "ana@example.com");
+        Contacto destinatario1= new Contacto("Ana", "ana@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         List<Contacto> destinatarios = Arrays.asList(destinatario1);
         Correo correo1 = new Correo("Asunto 1", "Contenido 1", contacto, destinatarios);
         bandejas.addCorreo(correo1);
@@ -145,9 +148,9 @@ public class CorreoTest {
     @Test
     public void testClearCorreos() {
         Bandejas bandejas = new Bandejas();
-        Contacto contacto = new Contacto("Juan", "juan@example.com");
+        Contacto contacto = new Contacto("Juan", "juan@example.com",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         
-        Contacto destinatario= new Contacto("Ana", "ana@example.com");
+        Contacto destinatario= new Contacto("Ana", "ana@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         List<Contacto> destinatarios =  Arrays.asList(destinatario);
         Correo correo1 = new Correo("Asunto 1", "Contenido 1", contacto, destinatarios);
         Correo correo2 = new Correo("Asunto 2", "Contenido 2", contacto, destinatarios);
@@ -160,9 +163,9 @@ public class CorreoTest {
     @Test
     public void testGetCorreos() {
         Bandejas bandejas = new Bandejas();
-        Contacto contacto = new Contacto("Juan", "juan@example.com");
+        Contacto contacto = new Contacto("Juan", "juan@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         
-        Contacto destinatario= new Contacto("Ana", "ana@example.com");
+        Contacto destinatario= new Contacto("Ana", "ana@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         List<Contacto> destinatarios =  Arrays.asList(destinatario);
         Correo correo1 = new Correo("Asunto 1", "Contenido 1", contacto, destinatarios);
         Correo correo2 = new Correo("Asunto 2", "Contenido 2", contacto, destinatarios);
@@ -172,6 +175,7 @@ public class CorreoTest {
         correos.add(correo2);
         bandejas.addCorreo(correo1);
         bandejas.addCorreo(correo2);
+
         assertTrue(bandejas.getCorreos().contains(correo2));
         assertTrue(bandejas.getCorreos().contains(correo1));
     }

@@ -14,8 +14,7 @@ public class Filtro_simple_Test {
     @Test
     public void Filtro_por_criterio_email_cuando_se_cumple_Test() {
        
-        GestorCorreos gestor = new GestorCorreos();
-
+        
         
         Contacto remitente1 = new Contacto("pedro", "profesor@ucp.edu.ar");
         Contacto destinatario1 = new Contacto("roberto", "estudiante@ar.com");
@@ -23,7 +22,7 @@ public class Filtro_simple_Test {
         
         Correo correo1 = new Correo("Tarea", "Contenido de la tarea", remitente1, Arrays.asList(destinatario1));
 
-        gestor.enviarCorreo(correo1);
+        remitente1.enviarCorreo(correo1);
 
        
         Filtro_por_criterio_email filtro_por_criterio = new Filtro_por_criterio_email ("@ucp.edu.ar");
@@ -46,7 +45,7 @@ public class Filtro_simple_Test {
 
         Correo correo1 = new Correo("Tarea", "Contenido de la tarea", remitente1, Arrays.asList(destinatario1));
 
-        gestor.enviarCorreo(correo1);
+        remitente1.enviarCorreo(correo1);
 
         Filtro_por_criterio_email filtro_por_criterio = new Filtro_por_criterio_email( "@ucp.edu.ar");
 
@@ -68,7 +67,7 @@ public class Filtro_simple_Test {
 
         Correo correo1 = new Correo("Tarea", "Contenido de la tarea", remitente1, Arrays.asList(destinatario1));
 
-        gestor.enviarCorreo(correo1);
+        remitente1.enviarCorreo(correo1);
 
         Filtro_por_nombre filtro_por_nombre = new Filtro_por_nombre( "");
 

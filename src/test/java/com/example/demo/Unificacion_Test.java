@@ -13,23 +13,23 @@ public class Unificacion_Test {
     
     @Test
     public void Crear_contacto_test() {
-        Contacto contacto = new Contacto("Juan Perez", "juan.perez@example.com");
+        Contacto contacto = new Contacto("Juan Perez", "juan.perez@example.com",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         assertEquals("Juan Perez", contacto.getNombre());
         assertEquals("juan.perez@example.com", contacto.getEmail());
     }
 
     @Test
     public void Nombre_vacio_test() {
-        Contacto contacto = new Contacto("", "juan.perez@example.com");
+        Contacto contacto = new Contacto("", "juan.perez@example.com",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         assertEquals("", contacto.getNombre());
         assertEquals("juan.perez@example.com", contacto.getEmail());
     }
 
     @Test
     public void Varios_contactos_test() {
-        Contacto contacto1 = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com");
-        Contacto contacto2 = new Contacto("jeuel", "null");
-        Contacto contacto3 = new Contacto("null", "carla_mart@gmail.com");
+        Contacto contacto1 = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto contacto2 = new Contacto("jeuel", "null",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto contacto3 = new Contacto("null", "carla_mart@gmail.com",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
 
         assertEquals("Enzo Alfonso", contacto1.getNombre());
         assertEquals("Enzo_alfonso@gmail.com", contacto1.getEmail());
@@ -42,8 +42,8 @@ public class Unificacion_Test {
     // Tests de Correo
     @Test
     public void Creacion_de_un_correo_test() {
-        Contacto remitente = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com");
-        Contacto destinatario1 = new Contacto("Carla Martinez", "carla_mart@gmail.com");
+        Contacto remitente = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto destinatario1 = new Contacto("Carla Martinez", "carla_mart@gmail.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         List<Contacto> destinatarios = Arrays.asList(destinatario1);
 
         Correo correo = new Correo("asunto", "contenido", remitente, destinatarios);
@@ -57,8 +57,8 @@ public class Unificacion_Test {
 
     @Test
     public void Creacion_de_correo_sin_asunto_test() {
-        Contacto remitente = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com");
-        Contacto destinatario1 = new Contacto("Carla Martinez", "carla_mart@gmail.com");
+        Contacto remitente = new Contacto("Enzo Alfonso", "Enzo_alfonso@gmail.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto destinatario1 = new Contacto("Carla Martinez", "carla_mart@gmail.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         List<Contacto> destinatarios = Arrays.asList(destinatario1);
 
         Correo correo = new Correo("", "contenido", remitente, destinatarios);
@@ -72,9 +72,9 @@ public class Unificacion_Test {
 
     @Test
     public void Crear_correo_con_multiples_destinatarios_test() {
-        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
-        Contacto destinatario1 = new Contacto("Maria Lopez", "maria.lopez@example.com");
-        Contacto destinatario2 = new Contacto("Carlos Gomez", "carlos.gomez@example.com");
+        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto destinatario1 = new Contacto("Maria Lopez", "maria.lopez@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto destinatario2 = new Contacto("Carlos Gomez", "carlos.gomez@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         List<Contacto> destinatarios = Arrays.asList(destinatario1, destinatario2);
 
         Correo correo = new Correo("Asunto", "Contenido", remitente, destinatarios);
@@ -90,16 +90,16 @@ public class Unificacion_Test {
     @Test
     public void Enviar_correo_con_multiples_destinatarios_test() {
         
-        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
-        Contacto destinatario1 = new Contacto("Maria Lopez", "maria.lopez@example.com");
-        Contacto destinatario2 = new Contacto("Carlos Gomez", "carlos.gomez@example.com");
+        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto destinatario1 = new Contacto("Maria Lopez", "maria.lopez@example.com",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto destinatario2 = new Contacto("Carlos Gomez", "carlos.gomez@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         List<Contacto> destinatarios = Arrays.asList(destinatario1, destinatario2);
 
         Correo correo = new Correo("Asunto", "Contenido", remitente, destinatarios);
   
-        //remitente.setEnviados(new Bandejas()).enviarCorreo(correo);
+        remitente.getBandejaEntrada().addCorreo(correo);
 
-        //assertNoNull(remitente.getEnviados());
+        assertNotNull(remitente.getBandejaEnviado());
         
     }
 
@@ -111,7 +111,8 @@ public class Unificacion_Test {
         Contacto remitente1 = new Contacto("profesor@ucp.edu.ar", "profesor@ucp.edu.ar");
         Contacto destinatario1 = new Contacto("estudiante@ucp.edu.ar", "estudiante@ucp.edu.ar");
         Correo correo1 = new Correo("Tarea", "Contenido de la tarea", remitente1, Arrays.asList(destinatario1));
-        gestor.enviarCorreo(correo1);
+        remitente1.getBandejaEnviado().addCorreo(correo1);
+        
 
         Filtro_por_criterio_email filtro = new Filtro_por_criterio_email("Correos de la UCP", "@ucp.edu.ar");
         List<Correo> resultado = filtro.aplicarFiltro(remitente1.getBandejaEnviado());
@@ -127,7 +128,7 @@ public class Unificacion_Test {
         Contacto remitente1 = new Contacto("profesor@ucp.edu.ar", "profesor@ucp.edu.ar");
         Contacto destinatario1 = new Contacto("estudiante@ucp.edu.ar", "estudiante@ucp.edu.ar");
         Correo correo1 = new Correo("Tarea", "Contenido de la tarea", remitente1, Arrays.asList(destinatario1));
-        gestor.enviarCorreo(correo1);
+        remitente1.enviarCorreo(correo1);
 
         Filtro_por_criterio_y_nombre filtro = new Filtro_por_criterio_y_nombre("Correos de la UCP", Arrays.asList("Tarea", "@ucp.edu.ar"), true);
         List<Correo> resultado = filtro.aplicarFiltro(remitente1.getBandejaEnviado());
@@ -137,47 +138,42 @@ public class Unificacion_Test {
     }
 
     // Tests de GestorDeEmails
+    @SuppressWarnings("unchecked")
     @Test
     public void Enviar_correo_test() {
-        GestorCorreos gestor = new GestorCorreos();
-        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
-        Contacto destinatario1 = new Contacto("Maria Lopez", "maria.lopez@example.com");
+        
+        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto destinatario1 = new Contacto("Maria Lopez", "maria.lopez@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        
         List<Contacto> destinatarios = Arrays.asList(destinatario1);
         Correo correo = new Correo("Asunto", "Contenido", remitente, destinatarios);
-        gestor.enviarCorreo(correo);
+        remitente.enviarCorreo(correo);
 
-        assertEquals(1, remitente.getBandejaEnviado().size());
-        assertEquals(correo, remitente.getBandejaEnviado().get(0));
+        assertEquals(1, ((List<Contacto>) remitente.getBandejaEnviado()).size());
+        assertEquals(correo,remitente.getBandejaEnviado());
     }
 
+   
     @Test
-    public void Bandeja_de_spam_test() {
+    public void testMoverSpamSinRemitente() {
+        Bandejas bandeja = new Bandejas();
+        Bandejas spam = new Bandejas();
+        Contacto contacto = new Contacto("Juan", "juan@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+
+        List<Contacto> destinatarios = new ArrayList<>();
+        destinatarios.add(new Contacto("Ana", "ana@example.com",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas()));
+
+        Correo correo1 = new Correo("Asunto 1", "Contenido 1", null, destinatarios); // Sin remitente
+        Correo correo2 = new Correo("Asunto 2", "Contenido 2", contacto, destinatarios);
+
+        bandeja.addCorreo(correo1);
+        bandeja.addCorreo(correo2);
+
         GestorCorreos gestor = new GestorCorreos();
-        Contacto remitente = new Contacto("spam@example.com", "null");
-        Contacto destinatario = new Contacto("usuario@ucp.edu.ar", "usuario@ucp.edu.ar");
-        List<Contacto> destinatarios = Arrays.asList(destinatario);
-        Correo correoSpam = new Correo("Oferta", "¡Ganaste un premio!", remitente, destinatarios);
-        //gestor.enviarCorreo(correoSpam);
-        gestor.moverSpamSinRemitente(destinatario.getEntrada(), destinatario.getBandejaSpam());
+        gestor.moverSpamSinRemitente(bandeja, spam);
 
-        assertEquals(1, destinatario.getBandejaSpam().size());
-        assertEquals(correoSpam, destinatario.getBandejaSpam().get(0));
-    }
-
-    @Test
-    public void CorreoElectronicoCompletoTest(){
-        
-      
-        Contacto remitente = new Contacto("Enzo Alfonso", "Enzoalfonso@gmail.com");
-        Contacto destinatario1 = new Contacto("Carla Martinez", "carla_mart@gmail.com");
-        List<Contacto> destinatarios = Arrays.asList(destinatario1); 
-        Contacto destinatario2 = new Contacto("Juan Perez", "juan.perez@ucp.edu");
-        List<Contacto> destinatarios2 = Arrays.asList(destinatario2);
-        Correo correo = new Correo("Asunto", "Contenido", remitente, destinatarios);
-        Correo correo2 = new Correo("importante", "preparacion de examen", remitente, destinatarios2);
-        
-        assertNull(remitente.getEnviados());
-       
-
+        assertFalse(bandeja.getCorreos().contains(correo1));
+        assertTrue(spam.getCorreos().contains(correo1));
+        assertTrue(bandeja.getCorreos().contains(correo2));
     }
 }
