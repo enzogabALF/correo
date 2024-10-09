@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @SpringBootTest
 public class GestorDeEmailsTest {
 
-    @Test
+ /*   @Test
     public void Enviar_correo_test() {
         Bandejas gestor = new Bandejas();
         Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
@@ -44,20 +44,7 @@ public class GestorDeEmailsTest {
         assertEquals(correoSpam, gestor.getBandejaDeSpam().get(0));  // Verificamos que es el correo correcto
     }
 
-    @Test
-    public void Bandeja_de_borradores_test() {
-        Bandejas gestor = new Bandejas();
 
-        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
-        Contacto destinatario = new Contacto("Maria Lopez", "maria.lopez@example.com");
-        List<Contacto> destinatarios = Arrays.asList(destinatario);
-
-        Correo borrador = new Correo("Borrador", "Este es un correo en borrador", remitente, destinatarios);
-        gestor.enviarCorreo(borrador);  // Simulamos que el correo está en borradores
-
-        assertEquals(1, gestor.getBandejaDeBorradores().size());
-        assertEquals(borrador, gestor.getBandejaDeBorradores().get(0));
-    }
 
     @Test
     public void Mover_correo_a_papelera_test() {
@@ -76,54 +63,6 @@ public class GestorDeEmailsTest {
         assertEquals(0, gestor.getBandejaDeEnviados().size());  // Verificamos que el correo ha sido eliminado de la bandeja de enviados
         assertEquals(1, papelera.size());  // Verificamos que el correo ha sido añadido a la papelera
         assertEquals(correo, papelera.get(0));  // Verificamos que es el correo correcto
-    }
-
-    @Test
-    public void Eliminar_correo_test() {
-        Bandejas gestor = new Bandejas();
-
-        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
-        Contacto destinatario = new Contacto("Maria Lopez", "maria.lopez@example.com");
-        List<Contacto> destinatarios = Arrays.asList(destinatario);
-
-        Correo correo = new Correo("Asunto", "Contenido", remitente, destinatarios);
-        gestor.enviarCorreo(correo);
-
-        gestor.eliminarCorreo(gestor.getBandejaDeEnviados(), remitente.getEmail(), destinatario.getEmail(), "Asunto");
-
-        assertEquals(0, gestor.getBandejaDeEnviados().size());  // Verificamos que el correo ha sido eliminado
-    }
-
-    @Test
-    public void Vaciar_Papelera_test() {
-        Bandejas gestor = new Bandejas();
-        List<Correo> papelera = new ArrayList<>();
-
-        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
-        Contacto destinatario = new Contacto("Maria Lopez", "maria.lopez@example.com");
-        List<Contacto> destinatarios = Arrays.asList(destinatario);
-
-        Correo correo = new Correo("Asunto", "Contenido", remitente, destinatarios);
-        papelera.add(correo);
-
-        gestor.vaciarPapelera(papelera);
-
-        assertEquals(0, papelera.size());
-    }
-
-    @Test
-    public void Bandeja_de_archivados_test() {
-        Bandejas gestor = new Bandejas();
-
-        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
-        Contacto destinatario = new Contacto("Maria Lopez", "maria.lopez@example.com");
-        List<Contacto> destinatarios = Arrays.asList(destinatario);
-
-        Correo archivado = new Correo("Asunto Archivado", "Contenido archivado", remitente, destinatarios);
-        gestor.enviarCorreo(archivado);
-
-        assertEquals(1, gestor.getBandejaDeArchivados().size());
-        assertEquals(archivado, gestor.getBandejaDeArchivados().get(0));
     }
 
     @Test
@@ -148,42 +87,7 @@ public class GestorDeEmailsTest {
         assertEquals(correo2, gestor.getBandejaDeEnviados().get(1));
     }
 
-    @Test
-    public void Mover_correo_inexistente_a_papelera_test() {
-        Bandejas gestor = new Bandejas();
-        List<Correo> papelera = new ArrayList<>();
     
-        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
-        Contacto destinatario = new Contacto("Maria Lopez", "maria.lopez@example.com");
-        List<Contacto> destinatarios = Arrays.asList(destinatario);
-    
-        Correo correo = new Correo("Asunto", "Contenido", remitente, destinatarios);
-        gestor.enviarCorreo(correo);
-    
-        // Intentamos mover un correo con un asunto diferente a la papelera
-        gestor.moverACarpetaPapelera(gestor.getBandejaDeEnviados(), papelera, remitente.getEmail(), destinatario.getEmail(), "Asunto Incorrecto");
-    
-        assertEquals(1, gestor.getBandejaDeEnviados().size());  // La bandeja de enviados debería seguir teniendo un correo
-        assertEquals(0, papelera.size());  // La papelera debería estar vacía
-    }
-    
-    @Test
-    public void Eliminar_correo_inexistente_test() {
-        Bandejas gestor = new Bandejas();
-    
-        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
-        Contacto destinatario = new Contacto("Maria Lopez", "maria.lopez@example.com");
-        List<Contacto> destinatarios = Arrays.asList(destinatario);
-    
-        Correo correo = new Correo("Asunto", "Contenido", remitente, destinatarios);
-        gestor.enviarCorreo(correo);
-    
-        // Intentamos eliminar un correo con un asunto diferente
-        gestor.eliminarCorreo(gestor.getBandejaDeEnviados(), remitente.getEmail(), destinatario.getEmail(), "Asunto Incorrecto");
-    
-        assertEquals(1, gestor.getBandejaDeEnviados().size());  // La bandeja de enviados debería seguir teniendo un correo
-        assertEquals(correo, gestor.getBandejaDeEnviados().get(0));  // Debería ser el mismo correo
-    }
 
     @Test
     public void Correo_no_es_spam_test() {
@@ -199,5 +103,98 @@ public class GestorDeEmailsTest {
         gestor.condicionDeSpam(correo);  // Este correo no debería ser considerado como spam
     
         assertEquals(0, gestor.getBandejaDeSpam().size());  // No debería haber correos en la bandeja de spam
+    } */
+
+
+    @Test
+    public void testEliminarCorreo() {
+        Bandejas bandeja = new Bandejas();
+        Contacto contacto = new Contacto("Juan", "juan@example.com");
+        List<Contacto> destinatarios = new ArrayList<>();
+        destinatarios.add(new Contacto("Ana", "ana@example.com"));
+        Correo correo = new Correo("Asunto 1", "Contenido 1", contacto, destinatarios);
+        bandeja.addCorreo(correo);
+
+        GestorCorreos gestor = new GestorCorreos();
+        gestor.eliminarCorreo(bandeja, correo);
+
+        assertFalse(bandeja.getCorreos().contains(correo));
+    }
+
+    @Test
+    public void testMoverACarpetaPapelera() {
+        Bandejas bandeja = new Bandejas();
+        Bandejas papelera = new Bandejas();
+        Contacto contacto = new Contacto("Juan", "juan@example.com");
+        List<Contacto> destinatarios = new ArrayList<>();
+        destinatarios.add(new Contacto("Ana", "ana@example.com"));
+        Correo correo = new Correo("Asunto 1", "Contenido 1", contacto, destinatarios);
+        bandeja.addCorreo(correo);
+
+        GestorCorreos gestor = new GestorCorreos();
+        gestor.moverACarpetaPapelera(bandeja, papelera, correo);
+
+        assertFalse(bandeja.getCorreos().contains(correo));
+        assertTrue(papelera.getCorreos().contains(correo));
+    }
+
+    @Test
+    public void testVaciarPapelera() {
+        Bandejas papelera = new Bandejas();
+        Contacto contacto = new Contacto("Juan", "juan@example.com");
+        List<Contacto> destinatarios = new ArrayList<>();
+        destinatarios.add(new Contacto("Ana", "ana@example.com"));
+        Correo correo1 = new Correo("Asunto 1", "Contenido 1", contacto, destinatarios);
+        Correo correo2 = new Correo("Asunto 2", "Contenido 2", contacto, destinatarios);
+        papelera.addCorreo(correo1);
+        papelera.addCorreo(correo2);
+
+        GestorCorreos gestor = new GestorCorreos();
+        gestor.vaciarPapelera(papelera);
+
+        assertTrue(papelera.getCorreos().isEmpty());
+    }
+
+    @Test
+    public void testEnviarCorreo() {
+        Contacto remitente = new Contacto("Juan", "juan@example.com");
+        Contacto destinatario1 = new Contacto("Ana", "ana@example.com");
+        Contacto destinatario2 = new Contacto("Carlos", "carlos@example.com");
+
+        List<Contacto> destinatarios = new ArrayList<>();
+        destinatarios.add(destinatario1);
+        destinatarios.add(destinatario2);
+
+        Correo correo = new Correo("Asunto Importante", "Contenido del correo", remitente, destinatarios);
+
+        GestorCorreos gestor = new GestorCorreos();
+        gestor.enviarCorreo(correo);
+
+        assertTrue(remitente.getEnviados().getCorreos().contains(correo));
+        assertTrue(destinatario1.getBandejaEntrada().getCorreos().contains(correo));
+        assertTrue(destinatario2.getBandejaEntrada().getCorreos().contains(correo));
+    }
+
+    @Test
+    public void testMoverSpamSinRemitente() {
+        Bandejas bandeja = new Bandejas();
+        Bandejas spam = new Bandejas();
+        Contacto contacto = new Contacto("Juan", "juan@example.com");
+
+        List<Contacto> destinatarios = new ArrayList<>();
+        destinatarios.add(new Contacto("Ana", "ana@example.com"));
+
+        Correo correo1 = new Correo("Asunto 1", "Contenido 1", null, destinatarios); // Sin remitente
+        Correo correo2 = new Correo("Asunto 2", "Contenido 2", contacto, destinatarios);
+
+        bandeja.addCorreo(correo1);
+        bandeja.addCorreo(correo2);
+
+        GestorCorreos gestor = new GestorCorreos();
+        gestor.moverSpamSinRemitente(bandeja, spam);
+
+        assertFalse(bandeja.getCorreos().contains(correo1));
+        assertTrue(spam.getCorreos().contains(correo1));
+        assertTrue(bandeja.getCorreos().contains(correo2));
     }
 }

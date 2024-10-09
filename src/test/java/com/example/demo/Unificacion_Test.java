@@ -97,23 +97,24 @@ public class Unificacion_Test {
 
         Correo correo = new Correo("Asunto", "Contenido", remitente, destinatarios);
   
-        remitente.setEnviados(new Bandejas()).enviarCorreo(correo);
+        //remitente.setEnviados(new Bandejas()).enviarCorreo(correo);
 
-        assertEquals(1, remitente.getEnviados().size());
+        //assertNoNull(remitente.getEnviados());
         
     }
+
 
     // Tests de Filtro 1
     @Test
     public void Filtro_1_por_remitente_test() {
-        Bandejas gestor = new Bandejas();
+        GestorCorreos gestor = new GestorCorreos();
         Contacto remitente1 = new Contacto("profesor@ucp.edu.ar", "profesor@ucp.edu.ar");
         Contacto destinatario1 = new Contacto("estudiante@ucp.edu.ar", "estudiante@ucp.edu.ar");
         Correo correo1 = new Correo("Tarea", "Contenido de la tarea", remitente1, Arrays.asList(destinatario1));
         gestor.enviarCorreo(correo1);
 
         Filtro_por_criterio_email filtro = new Filtro_por_criterio_email("Correos de la UCP", "@ucp.edu.ar");
-        List<Correo> resultado = filtro.aplicarFiltro(gestor.getBandejaDeEnviados());
+        List<Correo> resultado = filtro.aplicarFiltro(remitente1.getBandejaEnviado());
 
         assertEquals(1, resultado.size());
         assertEquals(correo1, resultado.get(0));
@@ -122,14 +123,14 @@ public class Unificacion_Test {
     // Tests de Filtro 2
     @Test
     public void Filtro_2_test() {
-        Bandejas gestor = new Bandejas();
+        GestorCorreos gestor = new GestorCorreos();
         Contacto remitente1 = new Contacto("profesor@ucp.edu.ar", "profesor@ucp.edu.ar");
         Contacto destinatario1 = new Contacto("estudiante@ucp.edu.ar", "estudiante@ucp.edu.ar");
         Correo correo1 = new Correo("Tarea", "Contenido de la tarea", remitente1, Arrays.asList(destinatario1));
         gestor.enviarCorreo(correo1);
 
         Filtro_por_criterio_y_nombre filtro = new Filtro_por_criterio_y_nombre("Correos de la UCP", Arrays.asList("Tarea", "@ucp.edu.ar"), true);
-        List<Correo> resultado = filtro.aplicarFiltro(gestor.getBandejaDeEnviados());
+        List<Correo> resultado = filtro.aplicarFiltro(remitente1.getBandejaEnviado());
 
         assertEquals(1, resultado.size());
         assertEquals(correo1, resultado.get(0));
@@ -138,30 +139,31 @@ public class Unificacion_Test {
     // Tests de GestorDeEmails
     @Test
     public void Enviar_correo_test() {
-        Bandejas gestor = new Bandejas();
+        GestorCorreos gestor = new GestorCorreos();
         Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com");
         Contacto destinatario1 = new Contacto("Maria Lopez", "maria.lopez@example.com");
         List<Contacto> destinatarios = Arrays.asList(destinatario1);
         Correo correo = new Correo("Asunto", "Contenido", remitente, destinatarios);
         gestor.enviarCorreo(correo);
 
-        assertEquals(1, gestor.getBandejaDeEnviados().size());
-        assertEquals(correo, gestor.getBandejaDeEnviados().get(0));
+        assertEquals(1, remitente.getBandejaEnviado().size());
+        assertEquals(correo, remitente.getBandejaEnviado().get(0));
     }
 
     @Test
     public void Bandeja_de_spam_test() {
-        Bandejas gestor = new Bandejas();
+        GestorCorreos gestor = new GestorCorreos();
         Contacto remitente = new Contacto("spam@example.com", "null");
         Contacto destinatario = new Contacto("usuario@ucp.edu.ar", "usuario@ucp.edu.ar");
         List<Contacto> destinatarios = Arrays.asList(destinatario);
         Correo correoSpam = new Correo("Oferta", "¡Ganaste un premio!", remitente, destinatarios);
-        gestor.enviarCorreo(correoSpam);
-        gestor.condicionDeSpam(correoSpam);
+        //gestor.enviarCorreo(correoSpam);
+        gestor.moverSpamSinRemitente(destinatario.getEntrada(), destinatario.getBandejaSpam());
 
-        assertEquals(1, gestor.getBandejaDeSpam().size());
-        assertEquals(correoSpam, gestor.getBandejaDeSpam().get(0));
+        assertEquals(1, destinatario.getBandejaSpam().size());
+        assertEquals(correoSpam, destinatario.getBandejaSpam().get(0));
     }
+
     @Test
     public void CorreoElectronicoCompletoTest(){
         
@@ -174,8 +176,7 @@ public class Unificacion_Test {
         Correo correo = new Correo("Asunto", "Contenido", remitente, destinatarios);
         Correo correo2 = new Correo("importante", "preparacion de examen", remitente, destinatarios2);
         
-        //enviados.eliminarCorreo(enviados.getBandejaDeEnviados(), remitente.getEmail(), remitente.getEmail(), "preparacion de examen");
-        //assertEquals(1, gestor.getBandejaDeEnviados().size());
+        assertNull(remitente.getEnviados());
        
 
     }

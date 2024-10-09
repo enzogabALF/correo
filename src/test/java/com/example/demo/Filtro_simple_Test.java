@@ -39,7 +39,7 @@ public class Filtro_simple_Test {
     @Test
     public void Filtro_por_criterio_email_cuando_no_se_cumple_Test() {
 
-       
+       GestorCorreos gestor = new GestorCorreos();
 
         Contacto destinatario1 = new Contacto("pedro", "profesor@ucp.edu.ar");
         Contacto remitente1 = new Contacto("roberto", "estudiante@ar.com");
@@ -50,7 +50,7 @@ public class Filtro_simple_Test {
 
         Filtro_por_criterio_email filtro_por_criterio = new Filtro_por_criterio_email( "@ucp.edu.ar");
 
-        List<Correo> resultado = filtro_por_criterio.aplicarFiltro(gestor.getBandejaDeEnviados());
+        List<Correo> resultado = filtro_por_criterio.aplicarFiltro(remitente1.getBandejaEnviado());
 
         
         assertEquals(0, resultado.size());
@@ -61,7 +61,7 @@ public class Filtro_simple_Test {
     @Test
     public void Filtro_por_nombre_test() {
 
-       
+        GestorCorreos gestor = new GestorCorreos();
 
         Contacto destinatario1 = new Contacto("pedro", "profesor@ucp.edu.ar");
         Contacto remitente1 = new Contacto("roberto", "estudiante@ar.com");
@@ -72,7 +72,7 @@ public class Filtro_simple_Test {
 
         Filtro_por_nombre filtro_por_nombre = new Filtro_por_nombre( "");
 
-        List<Correo> resultado = filtro_por_nombre.aplicarFiltro(gestor.getBandejaDeEnviados());
+        List<Correo> resultado = filtro_por_nombre.aplicarFiltro(remitente1.getBandejaEnviado());
 
         
         assertEquals(0, resultado.size());

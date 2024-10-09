@@ -20,7 +20,7 @@ public class GestorCorreos {
 
     public void enviarCorreo(Correo correo) {
         // Añadir el correo a la bandeja de enviados del remitente
-        correo.getRemitente().getBandejaEnviado().addCorreo(correo);
+        correo.getRemitente().getEnviados().addCorreo(correo);
 
         // Añadir el correo a la bandeja de entrada de cada destinatario
         for (Contacto destinatario : correo.getDestinatarios()) {

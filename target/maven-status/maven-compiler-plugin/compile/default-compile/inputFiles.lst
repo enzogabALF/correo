@@ -1,7 +1,10 @@
+/home/user/correo/src/main/java/com/example/demo/Filtro_por_criterio_email.java
+/home/user/correo/src/main/java/com/example/demo/Filtro_por_asunto.java
+/home/user/correo/src/main/java/com/example/demo/Filtro_por_nombre.java
 /home/user/correo/src/main/java/com/example/demo/GestorCorreos.java
-/home/user/correo/src/main/java/com/example/demo/Filtro_2.java
 /home/user/correo/src/main/java/com/example/demo/DemoApplication.java
+/home/user/correo/src/main/java/com/example/demo/Filtro_por_criterio_y_nombre.java
 /home/user/correo/src/main/java/com/example/demo/Contacto.java
 /home/user/correo/src/main/java/com/example/demo/Correo.java
-/home/user/correo/src/main/java/com/example/demo/Filtro.java
+/home/user/correo/src/main/java/com/example/demo/Filtro_por_asunto_y_contenido.java
 /home/user/correo/src/main/java/com/example/demo/Bandejas.java
