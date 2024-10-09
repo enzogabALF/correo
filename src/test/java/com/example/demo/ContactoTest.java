@@ -13,7 +13,8 @@ public class ContactoTest {
         Contacto contacto = new Contacto("Juan Perez", "juan.perez@example.com",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         assertEquals("Juan Perez", contacto.getNombre());
         assertEquals("juan.perez@example.com", contacto.getEmail());
-        assertEquals(1, contacto.getBandejaEntrada().size());    }
+        assertEquals(1, contacto.getBandejaEntrada().size());    
+    }
     @Test
     public void Nombre_vacio_test() {
         Contacto contacto = new Contacto("", "juan.perez@example.com",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());

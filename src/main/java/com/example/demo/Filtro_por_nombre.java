@@ -12,10 +12,9 @@ public class Filtro_por_nombre {
         this.nombre = nombre;
     }
 
-   
     public List<Correo> aplicarFiltro(List<Correo> correos) {
         return correos.stream()
-                .filter(correo -> correo.getRemitente().getEmail().contains(nombre)) 
+                .filter(correo -> correo.getRemitente().getNombre().contains(nombre)) 
                 .collect(Collectors.toList());
     }
 }
