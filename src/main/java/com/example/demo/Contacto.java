@@ -32,7 +32,8 @@ public class Contacto {
     Bandejas setEntrada(Bandejas entrada) {
         return this.entrada = entrada;
     }
-    Bandejas setEnviados(Bandejas enviados) {
+    
+    private Bandejas setEnviados(Bandejas enviados) {
         return this.enviados = enviados;
     }
     Bandejas setSpam(Bandejas spam) {

@@ -3,12 +3,12 @@ package com.example.demo;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Filtro {
-    private String nombre;
+public class Filtro_por_criterio_email {
+    
     private String criterio;
 
-    public Filtro(String nombre, String criterio) {
-        this.nombre = nombre;
+    public Filtro_por_criterio_email( String criterio) {
+        
         this.criterio = criterio;
     }
 
@@ -19,4 +19,3 @@ public class Filtro {
                 .collect(Collectors.toList());
     }
 }
-

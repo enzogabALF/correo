@@ -112,7 +112,7 @@ public class Unificacion_Test {
         Correo correo1 = new Correo("Tarea", "Contenido de la tarea", remitente1, Arrays.asList(destinatario1));
         gestor.enviarCorreo(correo1);
 
-        Filtro filtro = new Filtro("Correos de la UCP", "@ucp.edu.ar");
+        Filtro_por_criterio_email filtro = new Filtro_por_criterio_email("Correos de la UCP", "@ucp.edu.ar");
         List<Correo> resultado = filtro.aplicarFiltro(gestor.getBandejaDeEnviados());
 
         assertEquals(1, resultado.size());
@@ -128,7 +128,7 @@ public class Unificacion_Test {
         Correo correo1 = new Correo("Tarea", "Contenido de la tarea", remitente1, Arrays.asList(destinatario1));
         gestor.enviarCorreo(correo1);
 
-        Filtro_2 filtro = new Filtro_2("Correos de la UCP", Arrays.asList("Tarea", "@ucp.edu.ar"), true);
+        Filtro_por_criterio_y_nombre filtro = new Filtro_por_criterio_y_nombre("Correos de la UCP", Arrays.asList("Tarea", "@ucp.edu.ar"), true);
         List<Correo> resultado = filtro.aplicarFiltro(gestor.getBandejaDeEnviados());
 
         assertEquals(1, resultado.size());
