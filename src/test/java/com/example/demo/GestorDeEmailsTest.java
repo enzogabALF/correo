@@ -168,8 +168,8 @@ public class GestorDeEmailsTest {
         Correo correo = new Correo("Asunto Importante", "Contenido del correo", remitente, destinatarios);
 
         GestorCorreos gestor = new GestorCorreos();
-        gestor.enviarCorreo(correo);
 
+        gestor.enviarCorreo(correo);       
         assertTrue(remitente.getEnviados().getCorreos().contains(correo));
         assertTrue(destinatario1.getBandejaEntrada().getCorreos().contains(correo));
         assertTrue(destinatario2.getBandejaEntrada().getCorreos().contains(correo));
