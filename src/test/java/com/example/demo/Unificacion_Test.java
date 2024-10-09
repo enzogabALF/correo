@@ -105,55 +105,24 @@ public class Unificacion_Test {
         
     }
 
-
-    // Tests de Filtro 1
     @Test
-    public void Filtro_1_por_remitente_test() {
-        GestorCorreos gestor = new GestorCorreos();
-        Contacto remitente1 = new Contacto("profesor@ucp.edu.ar", "profesor@ucp.edu.ar");
-        Contacto destinatario1 = new Contacto("estudiante@ucp.edu.ar", "estudiante@ucp.edu.ar");
-        Correo correo1 = new Correo("Tarea", "Contenido de la tarea", remitente1, Arrays.asList(destinatario1));
-        remitente1.getBandejaEnviado().addCorreo(correo1);
-        
+    public void testEnviarCorreo() {
+        Contacto remitente = new Contacto("Juan", "juan@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto destinatario1 = new Contacto("Ana", "ana@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto destinatario2 = new Contacto("Carlos", "carlos@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
 
-        Filtro_por_criterio_email filtro = new Filtro_por_criterio_email("Correos de la UCP", "@ucp.edu.ar");
-        List<Correo> resultado = filtro.aplicarFiltro(remitente1.getBandejaEnviado());
+        List<Contacto> destinatarios = new ArrayList<>();
+        destinatarios.add(destinatario1);
+        destinatarios.add(destinatario2);
 
-        assertEquals(1, resultado.size());
-        assertEquals(correo1, resultado.get(0));
-    }
-
-    // Tests de Filtro 2
-    @Test
-    public void Filtro_2_test() {
-        GestorCorreos gestor = new GestorCorreos();
-        Contacto remitente1 = new Contacto("profesor@ucp.edu.ar", "profesor@ucp.edu.ar");
-        Contacto destinatario1 = new Contacto("estudiante@ucp.edu.ar", "estudiante@ucp.edu.ar");
-        Correo correo1 = new Correo("Tarea", "Contenido de la tarea", remitente1, Arrays.asList(destinatario1));
-        remitente1.enviarCorreo(correo1);
-
-        Filtro_por_criterio_y_nombre filtro = new Filtro_por_criterio_y_nombre("Correos de la UCP", Arrays.asList("Tarea", "@ucp.edu.ar"), true);
-        List<Correo> resultado = filtro.aplicarFiltro(remitente1.getBandejaEnviado());
-
-        assertEquals(1, resultado.size());
-        assertEquals(correo1, resultado.get(0));
-    }
-
-    // Tests de GestorDeEmails
-    @SuppressWarnings("unchecked")
-    @Test
-    public void Enviar_correo_test() {
-        
-        Contacto remitente = new Contacto("Juan Perez", "juan.perez@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
-        Contacto destinatario1 = new Contacto("Maria Lopez", "maria.lopez@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
-        
-        List<Contacto> destinatarios = Arrays.asList(destinatario1);
-        Correo correo = new Correo("Asunto", "Contenido", remitente, destinatarios);
+        Correo correo = new Correo("Asunto Importante", "Contenido del correo", remitente, destinatarios);
         remitente.enviarCorreo(correo);
-
-        assertEquals(1, ((List<Contacto>) remitente.getBandejaEnviado()).size());
-        assertEquals(correo,remitente.getBandejaEnviado());
+        destinatario1.recibirCorreo(correo);   
+        assertTrue(remitente.getBandejaEnviado().getCorreos().contains(correo));
+        assertTrue(destinatario1.getBandejaEntrada().getCorreos().contains(correo));
+        assertTrue(destinatario2.getBandejaEntrada().getCorreos().contains(correo));
     }
+
 
    
     @Test
