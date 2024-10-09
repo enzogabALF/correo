@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class Filtro_simple_Test {
     
     @Test
-    public void Filtro_por_criterio_email_Test() {
+    public void FiltroPorRemitenteEmailTest() {
 
         Contacto destinatario1 = new Contacto("pedro", "profesor@ucp.edu.ar",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         Contacto remitente1 = new Contacto("roberto", "estudiante@ar.com",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
@@ -24,18 +24,18 @@ public class Filtro_simple_Test {
         destinatario1.recibirCorreo(correo1);
         destinatario1.recibirCorreo(correo2);    
 
-        Filtro_por_criterio_email filtro_por_criterio = new Filtro_por_criterio_email( "@ucp.edu.ar");
+        FiltroPorRemitenteEmail FiltroPorRemitenteE = new FiltroPorRemitenteEmail( "@ucp.edu.ar");
 
-        List<Correo> resultado = filtro_por_criterio.aplicarFiltro(destinatario1.getBandejaEntrada().getCorreos());
+        List<Correo> Resultado = FiltroPorRemitenteE.aplicarFiltro(destinatario1.getBandejaEntrada().getCorreos());
         
-        assertEquals(1, resultado.size());
-        assertFalse(resultado.contains(correo1));
-        assertTrue(resultado.contains(correo2));
+        assertEquals(1, Resultado.size());
+        assertFalse(Resultado.contains(correo1));
+        assertTrue(Resultado.contains(correo2));
 
     }
 
     @Test
-    public void Filtro_por_nombre_test() {
+    public void FiltroPorNombreDelRemitenteTest() {
 
         Contacto destinatario1 = new Contacto("pedro", "profesor@ucp.edu.ar",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         Contacto remitente1 = new Contacto("roberto", "estudiante@ar.com",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
@@ -47,17 +47,17 @@ public class Filtro_simple_Test {
         destinatario1.recibirCorreo(correo1);
         destinatario1.recibirCorreo(correo2);
 
-        Filtro_por_nombre filtro_por_nombre = new Filtro_por_nombre( "roberto");
+        FiltroPorRemitenteNombre FiltroPorNombreDelRemitente = new FiltroPorRemitenteNombre( "roberto");
 
-        List<Correo> resultado = filtro_por_nombre.aplicarFiltro(destinatario1.getBandejaEntrada().getCorreos());
+        List<Correo> Resultado = FiltroPorNombreDelRemitente.aplicarFiltro(destinatario1.getBandejaEntrada().getCorreos());
         
-        assertEquals(1, resultado.size());
-        assertTrue(resultado.contains(correo1));
-        assertFalse(resultado.contains(correo2));
+        assertEquals(1, Resultado.size());
+        assertTrue(Resultado.contains(correo1));
+        assertFalse(Resultado.contains(correo2));
     }
 
     @Test
-    public void Filtro_por_asunto_test() {
+    public void FiltroPorAsuntoTest() {
 
         Contacto destinatario1 = new Contacto("pedro", "profesor@ucp.edu.ar",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         Contacto remitente1 = new Contacto("roberto", "estudiante@ar.com",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
@@ -71,13 +71,13 @@ public class Filtro_simple_Test {
         remitente1.enviarCorreo(correo1);
         remitente2.enviarCorreo(correo2);
 
-        Filtro_por_asunto filtro_por_asunto = new Filtro_por_asunto( "Tarea");
+        FiltroPorAsunto FiltroPorA = new FiltroPorAsunto( "Tarea");
 
-        List<Correo> resultado = filtro_por_asunto.aplicarFiltro(remitente1.getBandejaEnviado().getCorreos());
+        List<Correo> Resultado = FiltroPorA.aplicarFiltro(remitente1.getBandejaEnviado().getCorreos());
         
-        assertEquals(1, resultado.size());
-        assertTrue(resultado.contains(correo1));
-        assertFalse(resultado.contains(correo2));
+        assertEquals(1, Resultado.size());
+        assertTrue(Resultado.contains(correo1));
+        assertFalse(Resultado.contains(correo2));
     }
 
 

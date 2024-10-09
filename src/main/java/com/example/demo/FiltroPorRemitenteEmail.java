@@ -3,11 +3,11 @@ package com.example.demo;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Filtro_por_criterio_email {
+public class FiltroPorRemitenteEmail {
     
     private String criterio;
 
-    public Filtro_por_criterio_email( String criterio) {
+    public FiltroPorRemitenteEmail( String criterio) {
         
         this.criterio = criterio;
     }

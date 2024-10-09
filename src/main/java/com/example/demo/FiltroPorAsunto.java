@@ -3,12 +3,12 @@ package com.example.demo;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Filtro_por_asunto {
+public class FiltroPorAsunto {
     
     private String criterioAsunto;
     
 
-    public Filtro_por_asunto(String criterioAsunto) {
+    public FiltroPorAsunto(String criterioAsunto) {
         this.criterioAsunto = criterioAsunto;
         
     }

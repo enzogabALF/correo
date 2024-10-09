@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class Filtro_avanzados_Test {
     
     @Test
-    public void Filtro_por_nombre_y_criterio_email_Test() {
+    public void FiltroPorRemitenteNombreEmailTest() {
         
        
 
@@ -34,23 +34,23 @@ public class Filtro_avanzados_Test {
         destinatario1.recibirCorreo(correo4);
 
         
-        Filtro_por_criterio_y_nombre filtro_por_criterio_y_nombre = new Filtro_por_criterio_y_nombre("Maria", "example.com");
+        FiltroPorRemitenteNombreEmail FiltroPorRemitenteNE = new FiltroPorRemitenteNombreEmail ("Maria", "example.com");
 
         
-        List<Correo> resultado = filtro_por_criterio_y_nombre.aplicarFiltro(destinatario1.getBandejaEntrada().getCorreos());
+        List<Correo> Resultado = FiltroPorRemitenteNE.aplicarFiltro(destinatario1.getBandejaEntrada().getCorreos());
 
         
-        assertEquals(2, resultado.size());
-        assertEquals(correo1, resultado.get(0)); 
-        assertEquals(correo2, resultado.get(1)); 
-        assertTrue(resultado.contains(correo1));
-        assertTrue(resultado.contains(correo2));
-        assertFalse(resultado.contains(correo3));
-        assertFalse(resultado.contains(correo4));
+        assertEquals(2, Resultado.size());
+        assertEquals(correo1, Resultado.get(0)); 
+        assertEquals(correo2, Resultado.get(1)); 
+        assertTrue(Resultado.contains(correo1));
+        assertTrue(Resultado.contains(correo2));
+        assertFalse(Resultado.contains(correo3));
+        assertFalse(Resultado.contains(correo4));
     }
 
     @Test
-    public void Filtro_por_asunto_y_contenido_Test() {
+    public void FiltroporAsuntoYContenidoTest() {
 
         Contacto remitente1 = new Contacto("Maria Peres", "Maria@example.com",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         Contacto destinatario1 = new Contacto("Carlos", "carlos@domain.com",new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
@@ -70,19 +70,19 @@ public class Filtro_avanzados_Test {
         remitente1.enviarCorreo(correo4);
 
         
-        Filtro_por_asunto_y_contenido filtro_por_asunto_y_contenido = new Filtro_por_asunto_y_contenido("Asunto", "contenido");
+        FiltroPorAsuntoYContenido FiltroPorAC = new FiltroPorAsuntoYContenido("Asunto", "contenido");
 
         
-        List<Correo> resultado = filtro_por_asunto_y_contenido.aplicarFiltro(remitente1.getBandejaEnviado().getCorreos());
+        List<Correo> Resultado = FiltroPorAC.aplicarFiltro(remitente1.getBandejaEnviado().getCorreos());
         
         
-        assertEquals(3, resultado.size());
-        assertEquals(correo1, resultado.get(0)); 
-        assertEquals(correo2, resultado.get(1)); 
-        assertTrue(resultado.contains(correo1));
-        assertTrue(resultado.contains(correo2));
-        assertTrue(resultado.contains(correo3));
-        assertFalse(resultado.contains(correo4));
+        assertEquals(3, Resultado.size());
+        assertEquals(correo1, Resultado.get(0)); 
+        assertEquals(correo2, Resultado.get(1)); 
+        assertTrue(Resultado.contains(correo1));
+        assertTrue(Resultado.contains(correo2));
+        assertTrue(Resultado.contains(correo3));
+        assertFalse(Resultado.contains(correo4));
         
     }
 
