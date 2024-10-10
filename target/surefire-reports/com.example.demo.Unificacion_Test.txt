@@ -1,4 +1,16 @@
 -------------------------------------------------------------------------------
 Test set: com.example.demo.Unificacion_Test
 -------------------------------------------------------------------------------
-Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.179 s - in com.example.demo.Unificacion_Test
+Tests run: 14, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.422 s <<< FAILURE! - in com.example.demo.Unificacion_Test
+FiltroPorRemitenteNombreEmailTest  Time elapsed: 0.036 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <com.example.demo.Correo@5bf1b528> but was: <com.example.demo.Correo@2c92f094>
+	at com.example.demo.Unificacion_Test.FiltroPorRemitenteNombreEmailTest(Unificacion_Test.java:268)
+
+FiltroPorRemitenteEmailTest  Time elapsed: 0.012 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at com.example.demo.Unificacion_Test.FiltroPorRemitenteEmailTest(Unificacion_Test.java:185)
+
+FiltroPorNombreDelRemitenteTest  Time elapsed: 0.024 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at com.example.demo.Unificacion_Test.FiltroPorNombreDelRemitenteTest(Unificacion_Test.java:207)
+

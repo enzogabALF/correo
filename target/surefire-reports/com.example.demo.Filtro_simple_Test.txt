@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.example.demo.Filtro_simple_Test
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.096 s - in com.example.demo.Filtro_simple_Test
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.229 s <<< FAILURE! - in com.example.demo.Filtro_simple_Test
+FiltroPorRemitenteEmailTest  Time elapsed: 0.077 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at com.example.demo.Filtro_simple_Test.FiltroPorRemitenteEmailTest(Filtro_simple_Test.java:34)
+

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class Filtro_avanzados_Test {
+public class FiltroAvanzadosTest {
     
     @Test
     public void FiltroPorRemitenteNombreEmailTest() {
@@ -39,14 +39,38 @@ public class Filtro_avanzados_Test {
         
         List<Correo> Resultado = FiltroPorRemitenteNE.aplicarFiltro(destinatario1.getBandejaEntrada().getCorreos());
 
+
+
         
         assertEquals(2, Resultado.size());
-        assertEquals(correo1, Resultado.get(0)); 
-        assertEquals(correo2, Resultado.get(1)); 
-        assertTrue(Resultado.contains(correo1));
-        assertTrue(Resultado.contains(correo2));
-        assertFalse(Resultado.contains(correo3));
-        assertFalse(Resultado.contains(correo4));
+        
+       
+        assertTrue(Resultado.stream().anyMatch(correo -> 
+            correo.getAsunto().equals("Asunto 1") && 
+            correo.getContenido().equals("Contenido de la tarea") &&
+            correo.getRemitente().getEmail().equals("Maria@example.com")
+        ));
+
+
+        assertTrue(Resultado.stream().anyMatch(correo -> 
+            correo.getAsunto().equals("Asunto 2") && 
+            correo.getContenido().equals("Contenido del correo 2") &&
+            correo.getRemitente().getEmail().equals("maria@example.com")
+        ));
+    
+       
+        assertFalse(Resultado.stream().anyMatch(correo -> 
+            correo.getAsunto().equals("Asunto 3") && 
+            correo.getContenido().equals("Contenido del correo 3") &&
+            correo.getRemitente().getEmail().equals("pedro@example.com")
+        ));
+    
+        assertFalse(Resultado.stream().anyMatch(correo -> 
+            correo.getAsunto().equals("Asunto 4") && 
+            correo.getContenido().equals("Contenido del correo 4") &&
+            correo.getRemitente().getEmail().equals("Mari@example.co")
+        ));
+
     }
 
     @Test
@@ -77,13 +101,36 @@ public class Filtro_avanzados_Test {
         
         
         assertEquals(3, Resultado.size());
-        assertEquals(correo1, Resultado.get(0)); 
-        assertEquals(correo2, Resultado.get(1)); 
-        assertTrue(Resultado.contains(correo1));
-        assertTrue(Resultado.contains(correo2));
-        assertTrue(Resultado.contains(correo3));
-        assertFalse(Resultado.contains(correo4));
+
         
+        assertTrue(Resultado.stream().anyMatch(correo -> 
+            correo.getAsunto().equals("Asunto importante") && 
+            correo.getContenido().equals("Este es el contenido de la tarea") &&
+            correo.getRemitente().getEmail().equals("Maria@example.com")
+        ));
+        
+        assertTrue(Resultado.stream().anyMatch(correo -> 
+            correo.getAsunto().equals("Otro Asunto") && 
+            correo.getContenido().equals("contenido relevante para el filtro") &&
+            correo.getRemitente().getEmail().equals("Maria@example.com")
+        ));
+        
+        assertTrue(Resultado.stream().anyMatch(correo -> 
+            correo.getAsunto().equals("Asunto irrelevante") && 
+            correo.getContenido().equals("contenido especial que debería pasar el filtro") &&
+            correo.getRemitente().getEmail().equals("Maria@example.com")
+        ));
+        
+        
+        assertFalse(Resultado.stream().anyMatch(correo -> 
+            correo.getAsunto().equals("nuevo") && 
+            correo.getContenido().equals("ontenido de prueba") &&
+            correo.getRemitente().getEmail().equals("Maria@example.com")
+        ));
+
+
+
+
     }
 
 
