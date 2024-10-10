@@ -1,11 +1,11 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+gestor-emails,com.example.demo,FiltroPorRemitenteEmail,0,22,0,0,0,6,0,3,0,3
 gestor-emails,com.example.demo,GestorCorreos,0,47,2,6,0,17,2,7,0,5
-gestor-emails,com.example.demo,Filtro_por_nombre,0,22,0,0,0,6,0,3,0,3
-gestor-emails,com.example.demo,Filtro_por_asunto,0,21,0,0,0,6,0,3,0,3
-gestor-emails,com.example.demo,Filtro_por_criterio_email,0,22,0,0,0,6,0,3,0,3
-gestor-emails,com.example.demo,Filtro_por_asunto_y_contenido,0,34,1,3,0,8,1,4,0,3
+gestor-emails,com.example.demo,FiltroPorRemitenteNombre,0,22,0,0,0,6,0,3,0,3
 gestor-emails,com.example.demo,Contacto,6,82,0,0,2,22,2,13,2,13
 gestor-emails,com.example.demo,DemoApplication,0,3,0,0,0,1,0,1,0,1
-gestor-emails,com.example.demo,Filtro_por_criterio_y_nombre,0,36,0,4,0,8,0,5,0,3
 gestor-emails,com.example.demo,Correo,0,27,0,0,0,10,0,5,0,5
 gestor-emails,com.example.demo,Bandejas,0,27,0,0,0,10,0,5,0,5
+gestor-emails,com.example.demo,FiltroPorRemitenteNombreEmail,0,36,0,4,0,8,0,5,0,3
+gestor-emails,com.example.demo,FiltroPorAsuntoYContenido,0,34,1,3,0,8,1,4,0,3
+gestor-emails,com.example.demo,FiltroPorAsunto,0,21,0,0,0,6,0,3,0,3

@@ -106,21 +106,33 @@ public class Unificacion_Test {
     }
 
     @Test
+    
     public void testEnviarCorreo() {
         Contacto remitente = new Contacto("Juan", "juan@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         Contacto destinatario1 = new Contacto("Ana", "ana@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
         Contacto destinatario2 = new Contacto("Carlos", "carlos@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
+        Contacto destinaario3 = new Contacto("Maria", "maria@example.com", new Bandejas(), new Bandejas(), new Bandejas(), new Bandejas());
 
-        List<Contacto> destinatarios = new ArrayList<>();
-        destinatarios.add(destinatario1);
-        destinatarios.add(destinatario2);
 
+        List<Contacto> destinatarios = Arrays.asList(destinatario1, destinatario2, destinaario3);
         Correo correo = new Correo("Asunto Importante", "Contenido del correo", remitente, destinatarios);
         remitente.enviarCorreo(correo);
-        destinatario1.recibirCorreo(correo);   
+
+
+
         assertTrue(remitente.getBandejaEnviado().getCorreos().contains(correo));
-        assertTrue(destinatario1.getBandejaEntrada().getCorreos().contains(correo));
-        assertTrue(destinatario2.getBandejaEntrada().getCorreos().contains(correo));
+        assertEquals(1, destinatario1.getBandejaEntrada().getCorreos().size());
+        assertEquals(1, destinatario2.getBandejaEntrada().getCorreos().size());
+        assertEquals(1, destinaario3.getBandejaEntrada().getCorreos().size());
+        
+
+        destinatario2.getBandejaEntrada().getCorreos().get(0).setAsunto("Aprobado");
+
+       assertEquals("Asunto Importante", remitente.getBandejaEnviado().getCorreos().get(0).getAsunto());
+       assertEquals("Asunto Importante", destinatario1.getBandejaEntrada().getCorreos().get(0).getAsunto());
+       assertEquals("Aprobado", destinatario2.getBandejaEntrada().getCorreos().get(0).getAsunto());
+       assertEquals("Asunto Importante", destinaario3.getBandejaEntrada().getCorreos().get(0).getAsunto());
+
     }
 
 
@@ -160,8 +172,9 @@ public class Unificacion_Test {
          Correo correo1 = new Correo("Tarea", "Contenido de la tarea", remitente1, Arrays.asList(destinatario1));
          Correo correo2 = new Correo("Tarea", "Contenido de la tarea", remitente2, Arrays.asList(destinatario1));
          
-         destinatario1.recibirCorreo(correo1);
-         destinatario1.recibirCorreo(correo2);    
+         
+        remitente1.enviarCorreo(correo1);
+        remitente2.enviarCorreo(correo2);
  
          FiltroPorRemitenteEmail FiltroPorRemitenteE = new FiltroPorRemitenteEmail( "@ucp.edu.ar");
  
@@ -183,8 +196,8 @@ public class Unificacion_Test {
          Correo correo1 = new Correo("Tarea", "Contenido de la tarea", remitente1, Arrays.asList(destinatario1));
          Correo correo2 = new Correo("Tarea1", "Contenido de la tarea2", remitente2, Arrays.asList(destinatario1));
  
-         destinatario1.recibirCorreo(correo1);
-         destinatario1.recibirCorreo(correo2);
+         remitente1.enviarCorreo(correo1);
+         remitente2.enviarCorreo(correo2);
  
          FiltroPorRemitenteNombre FiltroPorNombreDelRemitente = new FiltroPorRemitenteNombre( "roberto");
  
@@ -238,10 +251,11 @@ public class Unificacion_Test {
          Correo correo3 = new Correo("Asunto 3", "Contenido del correo 3", remitente3, Arrays.asList(destinatario1));
          Correo correo4 = new Correo("Asunto 4", "Contenido del correo 4", remitente4, Arrays.asList(destinatario1));
  
-         destinatario1.recibirCorreo(correo1);
-         destinatario1.recibirCorreo(correo2);
-         destinatario1.recibirCorreo(correo3);
-         destinatario1.recibirCorreo(correo4);
+         remitente1.enviarCorreo(correo1);
+         remitente2.enviarCorreo(correo2);
+         remitente3.enviarCorreo(correo3);
+         remitente4.enviarCorreo(correo4);
+ 
  
          
          FiltroPorRemitenteNombreEmail FiltroPorRemitenteNE = new FiltroPorRemitenteNombreEmail("Maria", "example.com");

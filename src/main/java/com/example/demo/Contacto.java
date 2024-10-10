@@ -66,10 +66,9 @@ public class Contacto {
     public void enviarCorreo(Correo correo) {
         // Añadir el correo a la bandeja de enviados del remitente
         correo.getRemitente().getBandejaEnviado().addCorreo(correo);
-    }
-
-    public void recibirCorreo(Correo correo) {
-        // Añadir el correo a la bandeja de entrada del destinatario
-        correo.getDestinatarios().forEach(destinatario -> destinatario.getBandejaEntrada().addCorreo(correo));
+        // Añadir el correo a la bandeja de entrada de cada destinatario
+        for (Contacto destinatario : correo.getDestinatarios()) {
+            destinatario.getBandejaEntrada().addCorreo(correo.clonar());
+        }
     }
 }

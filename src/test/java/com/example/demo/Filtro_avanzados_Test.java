@@ -28,10 +28,10 @@ public class Filtro_avanzados_Test {
         Correo correo3 = new Correo("Asunto 3", "Contenido del correo 3", remitente3, Arrays.asList(destinatario1));
         Correo correo4 = new Correo("Asunto 4", "Contenido del correo 4", remitente4, Arrays.asList(destinatario1));
 
-        destinatario1.recibirCorreo(correo1);
-        destinatario1.recibirCorreo(correo2);
-        destinatario1.recibirCorreo(correo3);
-        destinatario1.recibirCorreo(correo4);
+        remitente1.enviarCorreo(correo1);
+        remitente2.enviarCorreo(correo2);
+        remitente3.enviarCorreo(correo3);
+        remitente4.enviarCorreo(correo4);
 
         
         FiltroPorRemitenteNombreEmail FiltroPorRemitenteNE = new FiltroPorRemitenteNombreEmail ("Maria", "example.com");

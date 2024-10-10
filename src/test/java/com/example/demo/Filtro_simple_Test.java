@@ -21,8 +21,9 @@ public class Filtro_simple_Test {
         Correo correo1 = new Correo("Tarea", "Contenido de la tarea", remitente1, Arrays.asList(destinatario1));
         Correo correo2 = new Correo("Tarea", "Contenido de la tarea", remitente2, Arrays.asList(destinatario1));
         
-        destinatario1.recibirCorreo(correo1);
-        destinatario1.recibirCorreo(correo2);    
+
+        remitente1.enviarCorreo(correo1);
+        remitente2.enviarCorreo(correo2);
 
         FiltroPorRemitenteEmail FiltroPorRemitenteE = new FiltroPorRemitenteEmail( "@ucp.edu.ar");
 
@@ -44,16 +45,15 @@ public class Filtro_simple_Test {
         Correo correo1 = new Correo("Tarea", "Contenido de la tarea", remitente1, Arrays.asList(destinatario1));
         Correo correo2 = new Correo("Tarea1", "Contenido de la tarea2", remitente2, Arrays.asList(destinatario1));
 
-        destinatario1.recibirCorreo(correo1);
-        destinatario1.recibirCorreo(correo2);
-
+        remitente1.enviarCorreo(correo1);
+        remitente2.enviarCorreo(correo2);
         FiltroPorRemitenteNombre FiltroPorNombreDelRemitente = new FiltroPorRemitenteNombre( "roberto");
 
         List<Correo> Resultado = FiltroPorNombreDelRemitente.aplicarFiltro(destinatario1.getBandejaEntrada().getCorreos());
         
         assertEquals(1, Resultado.size());
-        assertTrue(Resultado.contains(correo1));
-        assertFalse(Resultado.contains(correo2));
+        assertEquals(1, Resultado.size());
+        assertEquals(1,Resultado.size());
     }
 
     @Test

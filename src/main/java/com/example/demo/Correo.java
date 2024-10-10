@@ -30,4 +30,17 @@ public class Correo {
     public List<Contacto> getDestinatarios() {
         return destinatarios;
     } 
+    public void setAsunto(String asunto) {
+        this.asunto = asunto;
+    }
+
+    public Correo clonar() {
+        var nuevo = new Correo(this.getAsunto(),
+                this.getContenido(),
+                this.getRemitente(),
+                this.getDestinatarios());
+        return nuevo;
+    }
+
+   
 }
